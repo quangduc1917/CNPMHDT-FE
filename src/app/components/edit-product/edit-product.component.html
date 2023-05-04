@@ -1,0 +1,196 @@
+<app-nav-bar></app-nav-bar>
+<app-side-bar></app-side-bar>
+<div class="content-wrapper">
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mt-4">
+            <div class="card-header">
+              <h3 class="card-title mt-3"><b class="ml-5">Product update</b></h3>
+            </div>
+
+            <div class="card-body row pt-5">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="productName">Product name</label>
+                  <input type="text" id="inputName" [(ngModel)]="productName" name="productName" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="price">Price</label>
+                  <input type="text" id="inputNumberPhone" [(ngModel)]="price" name="price" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="inputyear">Year</label>
+                  <input type="text" name="year" [(ngModel)]="year" id="inputYear" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="inputOrigin">Origin</label>
+                  <input type="text" name="origin" [(ngModel)]="origin" id="inputOrigin" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="inputAmount">Amount</label>
+                  <input type="text" name="amount" [(ngModel)]="amount" id="inputAmount" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                  <label for="inputAddress">Brand</label>
+                  <select [(ngModel)]="selectbrand" name="selectbrand" class="form-control">
+                    <option *ngFor="let item of brands" value="{{item.brandId}}">{{item.brandName}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <input type="button" class="btn btn-primary" (click)="update()" value="Update">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="inputName">Image</label>
+                  <input type="file" id="inputName" multiple (change)="onFileChange($event)" name="name"
+                    class="form-control" />
+                </div>
+                
+                <div class="col-12 row mt-3">
+                  <img *ngIf="image1 != null" src="http://localhost:8080/api/public/downloadFile/{{image1}}" alt="image" class="col-3"
+                    width="100" height="50">
+                  <img *ngIf="image2 != null" src="http://localhost:8080/api/public/downloadFile/{{image2}}" alt="image" class="col-3"
+                    width="100" height="50">
+                  <img *ngIf="image3 != null" src="http://localhost:8080/api/public/downloadFile/{{image3}}" alt="image" class="col-3"
+                    width="100" height="50">
+                  <img *ngIf=" image4 != null" src="http://localhost:8080/api/public/downloadFile/{{image4}}" alt="image" class="col-3"
+                    width="100" height="50">
+                </div>
+                <div class="form-group mt-3">
+                  <input type="button" class="btn btn-primary" (click)="upload()" value="Upload">
+                </div>
+
+                <button class="btn btn-success" (click)="stock()">Stocking</button>
+                <button class="btn btn-warning ml-3" (click)="OutStock()">Out of stock</button>
+
+                <a class="btn btn-primary ml-3" href="#detail" data-toggle="modal">Detail</a>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Change detail Modal -->
+<div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+
+        <div class="form-box">
+          <div class="form-tab">
+            <ul class="nav nav-pills nav-fill nav-border-anim" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#password" role="tab"
+                  aria-controls="signin" aria-selected="true">Insert product detail</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="tab-content-5">
+              <div class="tab-pane fade show active" id="password" role="tabpanel" aria-labelledby="signin-tab">
+                <div class="col-12 row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="ram">Ram *</label>
+                      <input type="text" class="form-control" [(ngModel)]="ram" id="ram" name="ram">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="color">Color *</label>
+                      <input type="text" class="form-control" [(ngModel)]="color" id="color" name="color">
+                    </div><!-- End .form-group -->
+
+                    <div class="form-group">
+                      <label for="partnumber">Part number *</label>
+                      <input type="text" class="form-control" [(ngModel)]="partnumber" id="partnumber" name="partnumber">
+                    </div><!-- End .form-group -->
+
+                    <div class="form-group">
+                      <label for="processor">Processor *</label>
+                      <input type="text" class="form-control" [(ngModel)]="processor" id="processor" name="processor">
+                    </div><!-- End .form-group -->
+
+                    <div class="form-group">
+                      <label for="chipset">Chipset *</label>
+                      <input type="text" class="form-control" id="chipset" [(ngModel)]="chipset" name="chipset">
+                    </div><!-- End .form-group -->
+
+                    <div class="form-group">
+                      <label for="numberofslot">Number of slot *</label>
+                      <input type="text" class="form-control" id="numberofslot" [(ngModel)]="numberofslot" name="numberofslot">
+                    </div><!-- End .form-group -->
+
+                    <div class="form-group">
+                      <label for="expansionslot">Expansion slot *</label>
+                      <input type="text" class="form-control" id="expansionslot" [(ngModel)]="expansionslot" name="expansionslot">
+                    </div><!-- End .form-group -->
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="maximum">Maximum capactity *</label>
+                      <input type="text" class="form-control" [(ngModel)]="maximum" id="maximum" name="maximum">
+                    </div><!-- End .form-group -->
+
+                    <div class="form-group">
+                      <label for="vga">Vga *</label>
+                      <input type="text" class="form-control" [(ngModel)]="vga" id="vga" name="vga">
+                    </div><!-- End .form-group -->
+
+                    <div class="form-group">
+                      <label for="harddrive">Hard drive *</label>
+                      <input type="text" class="form-control" [(ngModel)]="harddrive" id="harddrive" name="harddrive">
+                    </div><!-- End .form-group -->
+
+                    <div class="form-group">
+                      <label for="optiondriver">Option driver *</label>
+                      <input type="text" class="form-control" id="optiondriver" [(ngModel)]="optiondriver" name="optiondriver">
+                    </div><!-- End .form-group -->
+  
+                    <div class="form-group">
+                      <label for="cardreader">Card reader *</label>
+                      <input type="text" class="form-control" id="cardreader" [(ngModel)]="cardreader" name="cardreader">
+                    </div><!-- End .form-group -->
+                    <div class="form-group">
+                      <label for="content">Content *</label>
+                      <input type="text" class="form-control" id="content" [(ngModel)]="content" name="content">
+                    </div><!-- End .form-group -->
+
+                    <div class="form-footer">
+                      <button *ngIf=" isEdit  != false" (click) ="saveDetail()" type="button" class="btn btn-outline-primary-2 mt-3">
+                          <span>Save</span>
+                          <i class="icon-long-arrow-right"></i>
+                      </button>
+
+                      <button *ngIf=" isEdit  == false" (click) ="updateDetail()" type="button" class="btn btn-outline-primary-2 mt-3">
+                        <span>Update</span>
+                        <i class="icon-long-arrow-right"></i>
+                    </button>
+                  </div><!-- End .form-footer -->
+                  </div>
+
+
+                </div>
+
+              </div><!-- .End .tab-pane -->
+            </div><!-- End .tab-content -->
+          </div><!-- End .form-tab -->
+        </div><!-- End .form-box -->
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->
+
+<app-footer></app-footer>

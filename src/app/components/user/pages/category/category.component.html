@@ -1,0 +1,122 @@
+<app-client-header [keyWork]="key"></app-client-header>
+<main class="main">
+
+
+    <div class="mt-4"></div>
+    <div class="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="toolbox">
+                        <div class="toolbox-right">
+                            <div class="toolbox-sort">
+                                <label for="sortby">Tìm kiếm theo giá:</label>
+                                <div class="select-custom">
+                                    <select [(ngModel)]="sort" id="sortby" name="sort" class="form-control"
+                                    (change)="retrieveTutorials()">
+                                    <option value="0">Tăng dần</option>
+                                    <option value="1">Giảm dần</option>
+                                </select>
+                                </div>
+                            </div><!-- End .toolbox-sort -->
+                        </div><!-- End .toolbox-right -->
+                    </div><!-- End .toolbox -->
+
+                    <div class="products mb-3">
+                        <div class="row justify-content-center">
+      
+
+       
+
+
+                            <div class="col-6 col-md-4 col-lg-4 col-xl-3" *ngFor="let item of tutorials | paginate :{
+                                itemsPerPage: pageSize,
+                                currentPage: page,
+                                totalItems: count
+                             };
+                             let i = index;
+                             "
+                             [class.active]="i == currentIndex" >
+                                <div class="product product-7 text-center">
+                                    <figure class="product-media">
+                                        <a [routerLink]="['/product', item.productId]" routerLinkActive="router-link-active">
+                                            <img *ngIf="item.imageFirst != null" src="http://localhost:8080/api/public/downloadFile/{{item.imageFirst}}" alt="Product image"
+                                                class="product-image">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a type="button" class="btn-product btn-cart" (click)="addToCart(item.productId)"><span>Thêm vào giỏ hàng</span></a>
+                                        </div><!-- End .product-action -->
+                                    </figure><!-- End .product-media -->
+
+                                    <div class="product-body">
+                                        <div class="product-cat">
+                                            <p>{{item.nameBrand}}</p>
+                                        </div><!-- End .product-cat -->
+                                        <h3 class="product-title"><a [routerLink]="['/product', item.productId]" routerLinkActive="router-link-active">{{item.nameProduct}}</a></h3><!-- End .product-title -->
+                                        <div class="product-price">
+                                            ${{item.price}}
+                                        </div><!-- End .product-price -->
+                                        <div class="ratings-container">
+                                            <div class="ratings">
+                                                <div class="ratings-val" style="width: 50%;"></div>
+                                                <!-- End .ratings-val -->
+                                            </div><!-- End .ratings -->
+                                            <span class="ratings-text">( {{item.reviewer}} Đánh giá )</span>
+                                        </div><!-- End .rating-container -->
+                                    </div><!-- End .product-body -->
+                                </div><!-- End .product -->
+                            </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+
+
+
+                        </div><!-- End .row -->
+                    </div><!-- End .products -->
+
+
+                    <nav aria-label="Page navigation">
+                        <pagination-controls class="pagination justify-content-center"  previousLabel="Prev" nextLabel="Next" (pageChange)="handlePageChange($event)">
+                        </pagination-controls>
+                    </nav>
+                </div><!-- End .col-lg-9 -->
+                <aside class="col-lg-3 order-lg-first">
+                    <div class="sidebar sidebar-shop">
+                        <div class="widget widget-clean">
+                            <label>Lọc:</label>
+                            <a href="#" class="sidebar-filter-clear">Clean All</a>
+                        </div><!-- End .widget widget-clean -->
+
+
+
+                        <div class="widget widget-collapsible">
+                            <h3 class="widget-title">
+                                <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true"
+                                    aria-controls="widget-4">
+                                    Thương hiệu
+                                </a>
+                            </h3><!-- End .widget-title -->
+
+                            <div class="collapse show" id="widget-4">
+                                <div class="widget-body">
+                                    <div class="filter-items">
+                                        <div class="filter-item">
+
+                                            <select [(ngModel)]="selected" name="selected" class="form-control" (change)="retrieveTutorials()">
+                                                <option *ngFor="let item of brands" [value]="item.brandId">{{item.brandName}}</option>
+                                              </select>
+
+                                        </div><!-- End .filter-item -->
+
+                                    </div><!-- End .filter-items -->
+                                </div><!-- End .widget-body -->
+                            </div><!-- End .collapse -->
+
+                        </div><!-- End .widget -->
+
+                    </div><!-- End .sidebar sidebar-shop -->
+                </aside><!-- End .col-lg-3 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .page-content -->
+</main><!-- End .main -->
+<app-client-footer></app-client-footer>

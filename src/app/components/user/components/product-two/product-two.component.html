@@ -1,0 +1,58 @@
+<div class="mb-5"></div>
+<div class="container for-you">
+  <div class="heading heading-flex mb-3">
+      <div class="heading-left">
+          <h2 class="title">Đề xuất cho bạn</h2><!-- End .title -->
+      </div><!-- End .heading-left -->
+
+     <div class="heading-right">
+          <a [routerLink]="['/products','']" class="title-link">Đề xuất cho bạn<i class="icon-long-arrow-right"></i></a>
+     </div><!-- End .heading-right -->
+  </div><!-- End .heading -->
+
+  
+
+  <div class="products" >
+      <div class="row justify-content-center" >
+          <div class="col-6 col-md-4 col-lg-3" *ngFor="let item of products">
+              <div class="product product-2">
+                  <figure class="product-media">
+                 
+                      <a [routerLink]="['/product', item.productId]" routerLinkActive="router-link-active">
+                          <img *ngIf="item.imageFirst != null" src="http://localhost:8080/api/public/downloadFile/{{item.imageFirst}}" alt="Product image" class="product-image">
+                      </a>
+
+
+                      <div class="product-action">
+                          <a type="button" class="btn-product btn-cart" (click)="addToCart(item.productId)" title="Add to cart"><span>Thêm vào giỏ hàng</span></a>
+                         
+                      </div><!-- End .product-action -->
+                  </figure><!-- End .product-media -->
+
+                  <div class="product-body">
+                      <div class="product-cat">
+                          <p>{{item.nameBrand}}</p>
+                      </div><!-- End .product-cat -->
+                      <h3 class="product-title"><a [routerLink]="['/product', item.productId]" >{{item.nameProduct}}</a></h3><!-- End .product-title -->
+                      <div class="product-price">
+                          <span class="new-price">{{item.price}} đ</span>
+                      </div><!-- End .product-price -->
+                      <div class="ratings-container">
+                          <div class="ratings">
+                              <div class="ratings-val" style="width: 40%;"></div><!-- End .ratings-val -->
+                          </div><!-- End .ratings -->
+                          <span class="ratings-text">( {{item.reviewer}} Đánh giá )</span>
+                      </div><!-- End .rating-container -->
+
+ 
+                  </div><!-- End .product-body -->
+              </div><!-- End .product -->
+          </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+
+
+
+
+
+      </div><!-- End .row -->
+  </div><!-- End .products -->
+</div><!-- End .container -->

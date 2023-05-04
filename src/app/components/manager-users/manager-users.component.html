@@ -1,0 +1,145 @@
+<app-nav-bar></app-nav-bar>
+<app-side-bar></app-side-bar>
+<div class="content-wrapper">
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mt-4">
+            <div class="card-header">
+              <h3 class="card-title mt-3"><b class="ml-5">Quản lý người dùng</b></h3>
+            </div>
+
+            <div class="col-12 mt-3 ml-2 mb-3 row">
+              <div class="col-4"> <button class="btn btn-primary" (click)="open(content)"><i
+                    class="fas fa-user-plus"></i> Add user</button></div>
+              <div class="col-5">
+                <div class="form-group">
+                  <input type="text" [(ngModel)]="keyWord" name="keyWord" class="form-control col-11 ml-5"
+                    aria-describedby="emailHelp" placeholder="Enter email or username, numberPhone ">
+
+                </div>
+              </div>
+              <div class="col-2">
+                <button class="btn btn-primary" (click)=" retrieveTutorials()">Search<i
+                    class="fas fa-search"></i></button>
+              </div>
+
+
+            </div>
+
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover mb-3 text-center">
+                <thead>
+                  <tr>
+                    <th><b>ID</b></th>
+                    <th><b>Username</b></th>
+                    <th><b>Email</b></th>
+                    <th><b>Address</b></th>
+                    <th><b>Action</b></th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let item of tutorials | paginate :{
+                     itemsPerPage: pageSize,
+                     currentPage: page,
+                     totalItems: count
+                  };
+                  let i = index
+                  "
+                  [class.active]="i == currentIndex"
+                  >
+                  <tr *ngIf=" item.status === 0">
+                      <td>{{ item.userId }}</td>
+                      <td>{{ item.name }}</td>
+                      <td>{{item.email}}</td>
+                      <td>{{item.address}}</td>
+                      <td>
+                        <button class="btn btn-success" (click)="edit( item.userId, item.name, item.numberPhone, item.address ,contentUpdate )">Edit <i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger ml-3" (click)="delete( item.userId )">Delete <i class="fas fa-trash"></i></button>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div>
+                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="handlePageChange($event)">
+                </pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<app-footer></app-footer>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title ml-3" id="modal-basic-title">Insert user</h4>
+    <button type="button" class="btn-close mr-3" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3 ml-5 mr-5">
+        <label for="username">Username</label>
+        <div class="input-group">
+          <input class="form-control" [(ngModel)]="username" placeholder="Enter username" name="username" ngbDatepicker
+            #dp="ngbDatepicker">
+        </div>
+      </div>
+      <div class="mb-3 ml-5 mr-5">
+        <label for="password">Password</label>
+        <div class="input-group">
+          <input type="password" [(ngModel)]="password" class="form-control" placeholder="Enter password"
+            name="password">
+        </div>
+      </div>
+      <div class="mb-3 ml-5 mr-5">
+        <label for="email">Email</label>
+        <div class="input-group">
+          <input type="email" class="form-control" [(ngModel)]="email" placeholder="Enter email" name="email">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
+
+<ng-template #contentUpdate let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title ml-3" id="modal-basic-title">Update user</h4>
+    <button type="button" class="btn-close mr-3" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3 ml-5 mr-5">
+        <label for="names">Name</label>
+        <div class="input-group">
+          <input class="form-control" [(ngModel)]="names" placeholder="Enter name" name="names" 
+           >
+        </div>
+      </div>
+      <div class="mb-3 ml-5 mr-5">
+        <label for="numberPhone"> NumberPhone</label>
+        <div class="input-group">
+          <input type="text" [(ngModel)]="numberPhone" class="form-control" placeholder="Enter number phone"
+            name="numberPhone">
+        </div>
+      </div>
+      <div class="mb-3 ml-5 mr-5">
+        <label for="address">Address</label>
+        <div class="input-group">
+          <input type="text" class="form-control" [(ngModel)]="address" placeholder="Enter address" name="address">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Update</button>
+  </div>
+</ng-template>

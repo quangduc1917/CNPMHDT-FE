@@ -1,0 +1,310 @@
+<app-client-header></app-client-header>
+<main class="main">
+    <div class="mt-4"></div>
+    <div class="page-content">
+        <div class="container">
+            <div class="product-details-top">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="product-gallery product-gallery-vertical">
+                            <div class="row">
+                                <figure class="product-main-image">
+                                    <img id="preview"
+                                        src="http://localhost:8080/api/public/downloadFile/{{imageFirst}}"
+                                        alt="product image">
+
+                                </figure><!-- End .product-main-image -->
+
+                                <div id="product-zoom-gallery" class="product-image-gallery">
+                                    <div class="product-gallery-item active">
+                                        <img src="http://localhost:8080/api/public/downloadFile/{{imageFirst}}"
+                                            alt="product side" (click)="image1()" #test1>
+                                    </div>
+
+                                    <div class="product-gallery-item">
+                                        <img  src="http://localhost:8080/api/public/downloadFile/{{imageTwo}}"
+                                            alt="product cross"(click)="image2()" #test2>
+                                    </div>
+
+                                    <div class="product-gallery-item">
+                                        <img src="http://localhost:8080/api/public/downloadFile/{{imageThree}}"
+                                            alt="product with model" (click)="image3()" #test3>
+                                    </div>
+
+                                    <div class="product-gallery-item">
+                                        <img  src="http://localhost:8080/api/public/downloadFile/{{imageFour}}"
+                                            alt="product back" (click)="image4()" #test4>
+                                    </div>
+                                </div><!-- End .product-image-gallery -->
+                            </div><!-- End .row -->
+                        </div><!-- End .product-gallery -->
+                    </div><!-- End .col-md-6 -->
+
+                    <div class="col-md-6">
+                        <div class="product-details">
+                            <h1 class="product-title">{{nameProduct}}</h1><!-- End .product-title -->
+
+                            <div class="ratings-container">
+                                <div class="ratings">
+                                    <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                </div><!-- End .ratings -->
+                                <a class="ratings-text" href="#product-review-link" id="review-link">( {{countReview}} Đánh giá )</a>
+                            </div><!-- End .rating-container -->
+
+                            <div class="product-price">
+                                {{price}} đ
+                            </div><!-- End .product-price -->
+
+
+                            <div class="details-filter-row details-row-size">
+                                <label for="qty">Qty:</label>
+                                <div class="product-details-quantity">
+                                    <input type="number" [(ngModel)]="item" id="qty" class="form-control" value="1" min="1" max="10"
+                                        step="1" data-decimals="0" required>
+                                </div><!-- End .product-details-quantity -->
+                            </div><!-- End .details-filter-row -->
+
+                            <div class="product-details-action">
+                                <a type="button" (click)="addToCart()" class="btn-product btn-cart"><span>Thêm vào giỏ hàng</span></a>
+
+
+                            </div><!-- End .product-details-action -->
+
+                            <div class="product-details-footer">
+
+
+                                <div class="social-icons social-icons-sm">
+                                    <span class="social-label">Share:</span>
+                                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i
+                                            class="icon-facebook-f"></i></a>
+                                    <a href="#" class="social-icon" title="Twitter" target="_blank"><i
+                                            class="icon-twitter"></i></a>
+                                    <a href="#" class="social-icon" title="Instagram" target="_blank"><i
+                                            class="icon-instagram"></i></a>
+                                    <a href="#" class="social-icon" title="Pinterest" target="_blank"><i
+                                            class="icon-pinterest"></i></a>
+                                </div>
+                            </div><!-- End .product-details-footer -->
+                        </div><!-- End .product-details -->
+                    </div><!-- End .col-md-6 -->
+                </div><!-- End .row -->
+            </div><!-- End .product-details-top -->
+
+            <div class="product-details-tab">
+                <ul class="nav nav-pills justify-content-center" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab"
+                            role="tab" aria-controls="product-desc-tab" aria-selected="true">Mô tả</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab"
+                            aria-controls="product-info-tab" aria-selected="false">Thông tin sản phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab"
+                            role="tab" aria-controls="product-shipping-tab" aria-selected="false">Bình luận</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab"
+                            role="tab" aria-controls="product-review-tab" aria-selected="false">Đánh giá</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel"
+                        aria-labelledby="product-desc-link">
+                        <div class="product-desc-content">
+                            <h3>Hình ảnh sản phẩm</h3>
+                            <div class="col-12 row">
+                                <div class="col-3">
+                                    <img src="http://localhost:8080/api/public/downloadFile/{{imageFirst}}"
+                                        alt="product side">
+                                </div>
+                                <div class="col-3">
+                                    <img src="http://localhost:8080/api/public/downloadFile/{{imageTwo}}"
+                                        alt="product side">
+
+                                </div>
+                                <div class="col-3">
+                                    <img src="http://localhost:8080/api/public/downloadFile/{{imageThree}}"
+                                        alt="product side">
+                                </div>
+                                <div class="col-3">
+                                    <img src="http://localhost:8080/api/public/downloadFile/{{imageFour}}"
+                                        alt="product side">
+                                </div>
+                            </div>
+
+
+                            <h3>Nội dung:</h3>
+
+                            <p *ngIf="content != null">{{content}}</p>
+
+                        </div><!-- End .product-desc-content -->
+                    </div><!-- .End .tab-pane -->
+                    <div class="tab-pane fade" id="product-info-tab" role="tabpanel"
+                        aria-labelledby="product-info-link">
+                        <div class="product-desc-content">
+                            <h3>Information</h3>
+                            <ul>
+                                <li>Card reader: {{cardReader}}</li>
+                                <li>Chip Set: {{chipSet}}</li>
+                                <li>Color: {{color}}</li>
+                                <li>Expansion slot: {{expansionSlot}} </li>
+                                <li>Hard drive: {{hardDrive}} </li>
+                                <li>Maximum capacity: {{maximumCapacity}}</li>
+                                <li>Number of slot: {{numberOfSlot}}</li>
+                                <li>Optical drive: {{opticalDrive}}</li>
+                                <li>Part number: {{partNumber}}</li>
+                                <li>Processor: {{processor}}</li>
+                                <li>Ram: {{ram}}</li>
+                                <li>Vga: {{vga}}</li>
+                            </ul>
+                        </div><!-- End .product-desc-content -->
+                    </div><!-- .End .tab-pane -->
+                    <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel"
+                        aria-labelledby="product-shipping-link">
+                        <div >
+                            <h3>Bình luận</h3>
+                            <div class="review">
+                                <div class="col-12 row">
+
+                                    <div class="col-7">
+                                        <div class="row no-gutters mt-5" *ngFor="let item of tutorials | paginate :{
+                                            itemsPerPage: pageSize,
+                                            currentPage: page,
+                                            totalItems: count,
+                                            id: '1'
+                                         }; let i = index
+                                         ">
+                                            <div class="col-auto">
+                                                <h4><a href="#">{{item.userName}}</a></h4>
+                                                <div class="ratings-container">
+                                                    <img *ngIf="item.imgAvatar != null"
+                                                        src="http://localhost:8080/api/public/downloadFile/{{item.imgAvatar}}"
+                                                        class="img-circle col-10 " alt="User Image">
+                                                    <img *ngIf="item.imgAvatar == null"
+                                                        src="assets/client/images/avatar/avatar5.png"
+                                                        class="img-circle col-10 " alt="User Image">
+                                                </div><!-- End .rating-container -->
+
+                                            </div><!-- End .col -->
+                                            <div class="col">
+
+                                                <div class="review-content">
+                                                    <p>{{item.commentText}}</p>
+                                                </div><!-- End .review-content -->
+
+                                            </div>
+                                        </div>
+
+                                        <nav aria-label="Page navigation mt-2">
+                                            <pagination-controls class="pagination justify-content-center"
+                                                previousLabel="Prev" nextLabel="Next"
+                                                (pageChange)="handlePageChangeC($event)" id="1"
+                                                directionLinks="true"  style="list-style-type: none;"
+                                                ></pagination-controls>
+                                        </nav>
+
+                                    </div>
+                                    <div class="col-5">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="comment">Bình luận *</label>
+                                                <input type="text" [(ngModel)]="comment" class="form-control"
+                                                    id="id-comment" name="comment" required>
+                                            </div><!-- End .form-group -->
+
+                                            <div class="form-footer">
+                                                <button (click)="fun_comment()" class="btn btn-outline-primary-2">
+                                                    <span>Bình luận</span>
+                                                    <i class="icon-long-arrow-right"></i>
+                                                </button>
+                                            </div><!-- End .form-footer -->
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                            </div><!-- End .review -->
+                        </div><!-- End .product-desc-content -->
+                    </div><!-- .End .tab-pane -->
+                    <div class="tab-pane fade" id="product-review-tab" role="tabpanel"
+                        aria-labelledby="product-review-link">
+                        <div class="reviews">
+                            <h3>Đánh giá</h3>
+                            <div class="review">
+                                <div class="col-12 row">
+                                    <div class="col-7">
+                                        <div class="row no-gutters mt-5" *ngFor="let item of reviews | paginate :{
+                                            itemsPerPage: pageSizer,
+                                            currentPage: pager,
+                                            totalItems: nCountReview,
+                                            id:'2'
+                                         };
+                                         let n = index;
+                                         ">
+                                            <div class="col-auto">
+                                                <h4><a href="#">{{item.userName}}</a></h4>
+                                                <div class="ratings-container">
+                                                    <img *ngIf="item.avatar == null"
+                                                        src="assets/client/images/avatar/avatar5.png"
+                                                        class="img-circle col-10 " alt="User Image">
+                                                    <img *ngIf="item.avatar != null"
+                                                        src="http://localhost:8080/api/public/downloadFile/{{item.avatar}}"
+                                                        class="img-circle col-10 " alt="User Image">
+                                                </div><!-- End .rating-container -->
+
+                                            </div><!-- End .col -->
+                                            <div class="col">
+
+                                                <div class="review-content">
+                                                    <p>{{item.star}} Điểm</p>
+                                                    <p>{{item.contentReview}}</p>
+                                                </div><!-- End .review-content -->
+
+                                            </div><!-- End .col-auto -->
+                                        </div><!-- End .row -->
+
+                                        <nav aria-label="Page navigation">
+                                            <pagination-controls class="pagination justify-content-center"
+                                                previousLabel="Prev" nextLabel="Next"
+                                                (pageChange)="handlePageChangeReview($event)"
+                                                style="list-style-type: none;" id="2" >
+                                            </pagination-controls>
+                                        </nav>
+
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="form-group">
+                                            <label for="pointName">Điểm (100đ) *</label>
+                                            <input type="text" class="form-control" [(ngModel)]="point" id="id-point"
+                                                name="point">
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-group">
+                                            <label for="reviewName">Đánh giá *</label>
+                                            <input type="text" class="form-control" id="id-review" [(ngModel)]="review"
+                                                name="review">
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-footer">
+                                            <button type="button" (click)="fun_review()"
+                                                class="btn btn-outline-primary-2">
+                                                <span>ĐÁNH GIÁ</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
+                                        </div><!-- End .form-footer -->
+                                    </div>
+                                </div>
+
+                            </div><!-- End .review -->
+
+                        </div><!-- End .reviews -->
+                    </div><!-- .End .tab-pane -->
+                </div><!-- End .tab-content -->
+            </div><!-- End .product-details-tab -->
+
+        </div><!-- End .container -->
+    </div><!-- End .page-content -->
+</main><!-- End .main -->
+<app-client-footer></app-client-footer>

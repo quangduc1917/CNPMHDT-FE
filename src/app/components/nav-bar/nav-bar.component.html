@@ -1,0 +1,49 @@
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <ul class="navbar-nav ml-auto">
+
+    <li class="nav-item mr-5" ngbDropdown >
+      <a type="button" class="nav-link mr-5 mb-1" ngbDropdownToggle id="dropdownBasic1">
+        <i class="fas fa-user"></i>
+        {{userinfo}}
+      </a>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+        <button ngbDropdownItem [routerLink]="['/adminprofile']" routerLinkActive="router-link-active"  ><i class="fas fa-id-card"></i> Thông tin cá nhân</button>
+        <button ngbDropdownItem (click)="open(content)"><i class="fas fa-id-card"></i> Thay đổi mật khẩu</button>
+        <button ngbDropdownItem (click)="logout()"  ><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+      </div>
+    </li>
+
+  </ul>
+</nav>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title ml-3" id="modal-basic-title">Thay đổi mật khẩu</h4>
+    <button type="button" class="btn-close mr-3" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3 ml-5 mr-5">
+        <label for="newpassword" class="mt-2">Mật khẩu mới</label>
+        <div class="input-group">
+          <input id="newpassword" type="password" class="form-control" [(ngModel)]="cnewpass" placeholder="Enter newpassword" name="dp" ngbDatepicker #dp="ngbDatepicker">
+        </div>
+      </div>
+      <div class="mb-3 ml-5 mr-5">
+        <label for="newpasswords" class="mt-2">Xác nhận mật khẩu mới</label>
+        <div class="input-group">
+          <input id="newpasswords" type="password" class="form-control" [(ngModel)]="cnewpasss" placeholder="Enter newpassword second" name="dp" ngbDatepicker #dp="ngbDatepicker">
+        </div>
+      </div>
+      <div class="mb-3 ml-5 mr-5">
+        <label for="oldpassword" class="mt-2">Mật khẩu cú</label>
+        <div class="input-group">
+          <input id="oldpassword" type="password" class="form-control" [(ngModel)]="coldpass" placeholder="Enter oldpassword" name="dp" ngbDatepicker #dp="ngbDatepicker">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Lưu</button>
+  </div>
+</ng-template>

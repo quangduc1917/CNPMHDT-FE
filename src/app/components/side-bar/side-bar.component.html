@@ -1,0 +1,73 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a [routerLink]="['/dashbroad']" routerLinkActive="router-link-active"  class="brand-link text-center">
+    <span class="brand-text font-weight-light ">Admin Page</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img *ngIf="avatar == null " src="assets/client/images/avatar/avatar5.png" class="img-circle elevation-2" alt="User Image">
+        <img *ngIf="avatar != null " src="http://localhost:8080/api/public/downloadFile/{{avatar}}" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a [routerLink]="['/adminprofile']" routerLinkActive="router-link-active"  class="d-block">{{userinfo}}</a>
+      </div>
+    </div>
+
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <li class="nav-item ">
+          <a [routerLink]="['/managerusers']" routerLinkActive="router-link-active"  class="nav-link text-left ml-2">
+            <i class="fas fa-users nav-icon"></i>
+            <p>Quản lý người dùng</p>
+          </a>
+        </li>
+
+
+
+        <li class="nav-item ">
+          <a [routerLink]="['/managerproducts']" routerLinkActive="router-link-active"  class="nav-link text-left">
+            <i class="fas fa-table nav-icon"></i>
+            <p>Quản lý sản phẩm</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a [routerLink]="['/managerbrands']" routerLinkActive="router-link-active"  class="nav-link text-left">
+            <i class="fas fa-bold nav-icon"></i>
+            <p>Quản lý thương hiệu</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/managerorders']" routerLinkActive="router-link-active"  class="nav-link text-left">
+            <i class="fas fa-bold nav-icon"></i>
+            <p>QUản lý đơn hàng</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a [routerLink]="['/managerstatistical']" routerLinkActive="router-link-active"  class="nav-link text-left">
+            <i class="fas fa-bold nav-icon"></i>
+            <p>Quản lý thống kê</p>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a [routerLink]="['/managernotify']" routerLinkActive="router-link-active"  class="nav-link text-left">
+            <i class="fas fa-bold nav-icon"></i>
+            <p>Quản lý bình luận</p>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

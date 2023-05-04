@@ -1,0 +1,104 @@
+<app-nav-bar></app-nav-bar>
+<app-side-bar></app-side-bar>
+<div class="content-wrapper">
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mt-4">
+            <div class="card-header">
+              <h3 class="card-title mt-3"><b class="ml-5">Quản lý đơn hàng </b></h3>
+            </div>
+
+            <div class="col-12 mt-3 ml-2 mb-3 row">
+
+                <div class="col-3">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Sắp xếp</label>
+                    <div class="col-sm-8">
+                      <select [(ngModel)]="sort" name="sort" class="form-control" (change)="retrieveTutorials()">
+                   
+                        <option value="0">Asc</option>
+                        <option value="1">Desc</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group row">
+                      <div class="col-form-label col-6">
+                        <input type="text" class="form-control" [(ngModel)]="keyWord" aria-describedby="emailHelp"
+                        placeholder="Enter keywork">
+                      </div>
+                      <div class="col-6" style="margin-top: 5px;">
+                        <button class="btn btn-primary" (click)="retrieveTutorials()">Tìm kiếm<i class="fas fa-search"></i></button>
+                      </div>
+    
+                    </div>
+                  </div>
+            </div>
+                
+
+
+
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover mb-3 text-center">
+                <thead>
+                  <tr>
+                    <th><b>ID</b></th>
+                    <th><b>Thông tin sản phẩm</b></th>
+                    <th><b>Tổng tiền</b></th>
+                    <th><b>Tài khoản đặt hàng</b></th>
+                    <th><b>Thời gian</b></th>
+                    <th><b>Thông tin người đặt hàng</b></th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let item of orders">
+
+                    <tbody *ngFor="let item of orders | paginate :{
+                        itemsPerPage: pageSize,
+                        currentPage: page,
+                        totalItems: count
+                     };
+                     let i = index;
+                     "
+                     [class.active]="i == currentIndex"
+                     >
+
+
+                  <tr>
+                    <td style="width: 3%;" >{{item.id}}</td>
+                    <td class="noidung" [innerHTML]="item.orderName"></td>
+                    <td class="noidung">{{item.order_total}} đ</td>
+                    <td class="noidung">{{item.userName}}</td>
+                    <td class="noidung">{{item.date}}</td>
+                    <td style="width: 35%;"> <div class="noidung" style="text-align: justify; margin-left: 20px; margin-right: 15px;" [innerHTML]="item.orderInfor"> </div></td>
+                    <!-- <td style="text-align:justify;" [innerHTML]="item.orderInfor"></td> -->
+                   
+                  </tr>
+                  
+
+                </tbody>
+              </table>
+              <div>
+                <pagination-controls  previousLabel="Prev" nextLabel="Next" (pageChange)="handlePageChange($event)">
+                </pagination-controls>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+
+
+
+ 
+
+<app-footer></app-footer>

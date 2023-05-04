@@ -1,0 +1,167 @@
+<app-client-header></app-client-header>
+<main class="main">
+  <div class="page-header text-center" style="background-image: url('assets/client/images/page-header-bg.jpg')">
+    <div class="container">
+      <h1 class="page-title">Giỏ hàng</h1>
+    </div><!-- End .container -->
+  </div><!-- End .page-header -->
+
+  <div class="mb-6"></div>
+
+  <div class="page-content">
+    <div class="cart">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9">
+            <table class="table table-cart table-mobile">
+              <thead>
+                <tr>
+                  <th>Sản phẩm</th>
+                  <th>Giá</th>
+                  <th>Số lượng</th>
+                  <th style="width: 130px;">Tổng cộng</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody *ngFor="let item of items1">
+                <tr *ngIf="item.state == 0">
+                  <td class="product-col">
+                    <div class="product">
+                      <figure class="product-media">
+                        <a [routerLink]="['/product', item.productId]">
+                          <img *ngIf="item.imageProduct!=null"
+                            src="http://localhost:8080/api/public/downloadFile/{{item.imageProduct}}"
+                            alt="Product image">
+                        </a>
+                      </figure>
+
+                      <h3 class="product-title">
+                        <a [routerLink]="['/product', item.productId]">{{item.nameProduct}}</a>
+                      </h3><!-- End .product-title -->
+                    </div><!-- End .product -->
+                  </td>
+                  <td class="price-col" style="width: 130px;">{{item.price}} đ</td>
+                  <td class="quantity-col">
+                    <div class="cart-product-quantity">
+                      <input type="number" class="form-control" (change)="updateAmountItem($event, item.cartId)"
+                        value="{{item.amountItem}}" min="1" max="100" step="1" data-decimals="0" required>
+                    </div><!-- End .cart-product-quantity -->
+                  </td>
+                  <td class="total-col">{{item.totalPrice}} đ</td>
+                  <td class="remove-col"><button class="btn-remove" (click)="deleteItem( item.cartId)"><i
+                        class="icon-close"></i></button></td>
+                </tr>
+              </tbody>
+            </table><!-- End .table table-wishlist -->
+
+          </div><!-- End .col-lg-9 -->
+          <aside class="col-lg-3">
+            <div class="summary summary-cart">
+              <h3 class="summary-title">Tổng cộng giỏ hàng</h3><!-- End .summary-title -->
+
+              <table class="table table-summary">
+                <tbody>
+                  <tr class="summary-total">
+                    <td>Tổng cộng:</td>
+                    <td>{{total}} đ</td>
+                  </tr><!-- End .summary-total -->
+                </tbody>
+              </table>
+
+              <a href="#checkout-modal" data-toggle="modal"
+                class="btn btn-outline-primary-2 btn-order btn-block">TIẾN HÀNH THANH TOÁN</a>
+            </div><!-- End .summary -->
+
+            <a [routerLink]="['/home']" routerLinkActive="router-link-active"
+              class="btn btn-outline-dark-2 btn-block mb-3"><span>TIẾP TỤC MUA SẮM</span><i
+                class="icon-refresh"></i></a>
+          </aside><!-- End .col-lg-3 -->
+        </div><!-- End .row -->
+      </div><!-- End .container -->
+    </div><!-- End .cart -->
+  </div><!-- End .page-content -->
+</main>
+
+
+<app-client-footer></app-client-footer>
+
+
+
+<!-- Change detail Modal -->
+<div class="modal fade" id="checkout-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+
+        <div class="form-box">
+          <div class="form-tab">
+            <ul class="nav nav-pills nav-fill nav-border-anim" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#password" role="tab"
+                  aria-controls="signin" aria-selected="true">Thanh toán</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="tab-content-5">
+              <div class="tab-pane fade show active" id="password" role="tabpanel" aria-labelledby="signin-tab">
+
+                <table class="table table-summary">
+                  <tbody>
+                    <tr class="summary-total">
+                      <td>Tên: </td>
+                      <td>
+                        <div class="form-group">
+                        <input type="text"  [(ngModel)]="nameorder"  class="form-control" id=""
+                            name="">
+                    </div><!-- End .form-group -->
+                    </td>
+
+                      
+
+                    </tr>
+                    <tr class="summary-total">
+                      <td>Số điện thoại: </td>
+                      <!-- <td>{{numberphone}}</td> -->
+                      <td>
+                        <div class="form-group">
+                        <input type="text"   [(ngModel)]="phoneorder"  class="form-control" id=""
+                            name="">
+                    </div><!-- End .form-group -->
+                    </td>
+
+                    </tr>
+                    <tr class="summary-total">
+                      <td>Địa chỉ: </td>
+                      <!-- <td>{{address}}</td> -->
+                      <td>
+                        <div class="form-group">
+                        <input type="text"  [(ngModel)]="addressoder"   class="form-control" id=""
+                            name="">
+                    </div><!-- End .form-group -->
+                    </td>
+
+                    </tr>
+                    <tr class="summary-total">
+                      <td>Tổng cộng:</td>
+                      <td>{{total}} <span>đ</span></td>
+                    </tr><!-- End .summary-total -->
+                    <tr class="summary-total">
+                      <td></td>
+                      <td><button  class="btn btn-outline-primary-2 btn-order btn-block" (click)="checkOut()">Đồng ý</button></td>
+                    </tr><!-- End .summary-total -->
+                  </tbody>
+                </table>
+
+
+
+              </div><!-- .End .tab-pane -->
+            </div><!-- End .tab-content -->
+          </div><!-- End .form-tab -->
+        </div><!-- End .form-box -->
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->

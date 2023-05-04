@@ -1,0 +1,71 @@
+<app-nav-bar></app-nav-bar>
+<app-side-bar></app-side-bar>
+<div class="content-wrapper">
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mt-4">
+            <div class="card-header">
+              <h3 class="card-title mt-3"><b class="ml-5">Manager brands</b></h3>
+            </div>
+
+            <div class="col-12 mt-3 ml-2 mb-3 row">
+              <div class="col-6"> <button class="btn btn-primary" (click)="open(content)"><i class="fas fa-plus-circle"></i> Add brand</button>
+              </div>
+
+
+            </div>
+
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover mb-3 text-center">
+                <thead>
+                  <tr>
+                    <th><b>ID</b></th>
+                    <th><b>Name brand</b></th>
+                    <th><b>Action</b></th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let item of brands">
+                  <tr>
+                    <td>{{item.brandId}}</td>
+                    <td>{{item.brandName}}</td>
+                    <td><button class="btn btn-success" (click)="edit( content ,item.brandId, item.brandName )">Edit <i class="fas fa-edit"></i></button></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<app-footer></app-footer>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title ml-3" id="modal-basic-title">Insert brands</h4>
+    <button type="button" class="btn-close mr-3" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3 ml-5 mr-5">
+        <label for="dateOfBirth" class="mt-2">BrandName</label>
+        <div class="input-group">
+          <input type="text" id="brandName" *ngIf="isEdit == false" [(ngModel)]="nameBrand" class="form-control" placeholder="Enter brandname" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <input type="text"  id="brandName" *ngIf="isEdit == true" [(ngModel)]="nameBrand" class="form-control" placeholder="Enter brandname" name="brandName">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" *ngIf="isEdit == false" (click)="modal.close('Save click')">Save</button>
+    <button type="button" class="btn btn-outline-dark" *ngIf="isEdit == true" (click)="modal.close('Save click')">Update</button>
+  </div>
+</ng-template>
