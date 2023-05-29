@@ -11,6 +11,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class OrderService {
+  length: number;
 
   constructor(private http: HttpClient) { }
   
@@ -19,6 +20,10 @@ export class OrderService {
   }
 
 
+  getOrder(): Observable<any> {
+    return this.http.get(AUTH_API + '/api/public/order/getorder');
+  }
+
   getAllOrder1(params): Observable<any> {
     return this.http.get(AUTH_API + '/api/public/order/all1', { params });
   }
@@ -26,5 +31,8 @@ export class OrderService {
 
   getAllOrder12(): Observable<any> {
     return this.http.get(AUTH_API + '/api/public/order/sale', httpOptions);
+  }
+  deleteOrder(id: number): Observable<any> {
+    return this.http.delete(AUTH_API + '/api/public/order/delete/' + id, httpOptions);
   }
 }

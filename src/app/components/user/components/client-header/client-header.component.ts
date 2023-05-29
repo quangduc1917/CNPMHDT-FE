@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import jwtDecode from 'jwt-decode';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { OrderService } from 'src/app/services/order.service';
 
 
 
@@ -19,7 +20,7 @@ export class ClientHeaderComponent implements OnInit, OnChanges {
   password!: string;
   email!: string;
   userinfo!: string;
- 
+  order?: any;
 
   confirmpassword!:String;
 
@@ -44,7 +45,7 @@ export class ClientHeaderComponent implements OnInit, OnChanges {
 
 
 
-  constructor(public auth: AuthService, private token: TokenStorageService, private router: Router,private formbuilder: FormBuilder) {
+  constructor(public auth: AuthService, private token: TokenStorageService, private router: Router,private formbuilder: FormBuilder, private orders: OrderService) {
     if (this.token.getToken() != null) {
       this.auth.setLogin(true);
     }
@@ -53,9 +54,10 @@ export class ClientHeaderComponent implements OnInit, OnChanges {
 
   }
   ngOnChanges(): void {
-
+    
   }
 
+  
   ngOnInit() {
     if (this.token.getToken() != null) {
       this.auth.getUserInfo().subscribe(
@@ -68,7 +70,21 @@ export class ClientHeaderComponent implements OnInit, OnChanges {
           this.avatar = data?.imgAvatar;
         }
       );
+      this.loadData();
     }
+  }
+
+  loadData() {
+    this.orders.getOrder().subscribe(
+      (data) => {
+        this.order = data;
+        for(let i=0;i<this.order.length;i++){
+          this.order[i].order_total=this.formatCash(this.order[i].order_total.toString());
+        }
+      }
+    );
+    console.log(this.order);
+
   }
 
   login() {
@@ -109,7 +125,11 @@ export class ClientHeaderComponent implements OnInit, OnChanges {
     
   }
 
-
+  formatCash(str) {
+    return str.split('').reverse().reduce((prev, next, index) => {
+      return ((index % 3) ? next : (next + '.')) + prev
+    })
+  }
   logout() {
     this.token.singOut();
   }

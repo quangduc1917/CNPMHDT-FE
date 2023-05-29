@@ -15,6 +15,7 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="#profile-modal" data-toggle="modal">Thông tin cá nhân</a>
                                     <a class="dropdown-item" href="#password-modal" data-toggle="modal">Đổi mật khẩu</a>
+                                    <a class="dropdown-item" href="#order" data-toggle="modal">Đơn hàng</a>
                                     <a class="dropdown-item" type="button" (click)="logout()" >Thoát</a>
                                   </div>
                             </li>
@@ -377,6 +378,53 @@
                         </div><!-- End .tab-content -->
                     </div><!-- End .form-tab -->
                 </div><!-- End .form-box -->
+            </div><!-- End .modal-body -->
+        </div><!-- End .modal-content -->
+    </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->
+
+<div class="modal fade" id="order" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="icon-close"></i></span>
+                </button>
+
+                
+                <div class="card-body">
+                    <table id="example2" class="table table-bordered table-hover mb-3 text-center">
+                      <thead>
+                        <tr>
+                          <th><b>ID</b></th>
+                          <th><b>Thông tin sản phẩm</b></th>
+                          <th><b>Tổng tiền</b></th>
+                          <th><b>Tài khoản đặt hàng</b></th>
+                          <th><b>Thời gian</b></th>
+                          <th><b>Thông tin người đặt hàng</b></th>
+                    
+                        </tr>
+                      </thead>
+                      <tbody *ngFor="let item of order">
+      
+                         
+      
+                        <tr>
+                          <td style="width: 3%;" >{{item.id}}</td>
+                          <td class="noidung" [innerHTML]="item.orderName"></td>
+                          <td class="noidung">{{item.order_total}} đ</td>
+                          <td class="noidung">{{item.userName}}</td>
+                          <td class="noidung">{{item.date}}</td>
+                          <td style="width: 35%;"> <div class="noidung" style="text-align: justify; margin-left: 20px; margin-right: 15px;" [innerHTML]="item.orderInfor"> </div></td>
+                          <!-- <td style="text-align:justify;" [innerHTML]="item.orderInfor"></td> -->
+            
+                        </tr>
+                        
+      
+                      </tbody>
+                    </table>
+                
+                  </div>
             </div><!-- End .modal-body -->
         </div><!-- End .modal-content -->
     </div><!-- End .modal-dialog -->

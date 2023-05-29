@@ -2,6 +2,7 @@
 <app-side-bar></app-side-bar>
 <div class="content-wrapper">
 
+
   <section class="content">
     <div class="container-fluid">
       <div class="row">
@@ -52,6 +53,7 @@
                     <th><b>Tài khoản đặt hàng</b></th>
                     <th><b>Thời gian</b></th>
                     <th><b>Thông tin người đặt hàng</b></th>
+                    <th><b>Trạng thái</b></th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let item of orders">
@@ -75,7 +77,9 @@
                     <td class="noidung">{{item.date}}</td>
                     <td style="width: 35%;"> <div class="noidung" style="text-align: justify; margin-left: 20px; margin-right: 15px;" [innerHTML]="item.orderInfor"> </div></td>
                     <!-- <td style="text-align:justify;" [innerHTML]="item.orderInfor"></td> -->
-                   
+                   <td class="noidung"  style="width: 15%;">
+                      <button class="btn btn-danger ml-3" (click)="delete( item.id )">Delete <i class="fas fa-trash"></i></button>
+                    </td>
                   </tr>
                   
 

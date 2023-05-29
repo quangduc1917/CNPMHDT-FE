@@ -12,6 +12,7 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class ManagerOrderComponent implements OnInit {
 
+
   orders?: any;
   test!: string;
   keyWord !: string;
@@ -107,6 +108,17 @@ export class ManagerOrderComponent implements OnInit {
   handlePageChange(event): void {
     this.page = event;
     this.retrieveTutorials();
+  }
+
+  delete(id: number) {
+    this.order.deleteOrder(id).subscribe(
+      (data) => {
+        this.retrieveTutorials();
+        alert('Delete success!');
+      }, (err) => {
+        alert('Delete failed!');
+      }
+    );
   }
 
 }

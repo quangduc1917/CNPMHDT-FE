@@ -78,12 +78,19 @@ export class CartComponent implements OnInit {
     );
   }
 
+
+
   updateAmountItem(event, cartId) {
     const id = cartId;
     const amount = event.target.value;
     this.cart.updateCart(id, amount).subscribe(
       (data) => {
+        alert('Cập nhật số lượng sản phẩm thành công');
         this.fecthData();
+        window.location.reload();
+      },err => {
+        alert('Số lượng sản phẩm k đủ');
+        window.location.reload();
       }
     );
   }
