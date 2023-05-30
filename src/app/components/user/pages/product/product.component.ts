@@ -267,7 +267,8 @@ export class ProductComponent implements OnInit {
         (data) => {
           alert('Add item to cart success!');
         }, err => {
-          alert('Add item to cart failed!');
+          // alert('Add item to cart failed!');
+          alert('Số lượng sản phẩm k đủ');
         }
       );
     }

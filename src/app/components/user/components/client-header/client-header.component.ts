@@ -113,11 +113,11 @@ export class ClientHeaderComponent implements OnInit, OnChanges {
    
       this.auth.register(this.username, this.password, this.email).subscribe(
         (data) => {
-          alert('Register success');
+          alert('Đăng kí thành công');
           window.location.reload();
         },
         (error) => {
-          alert('Register failed');
+          alert('Đăng ký không thành công, email hoặc username đã tồn tại');
         }
       )
     
